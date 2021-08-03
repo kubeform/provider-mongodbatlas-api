@@ -3,7 +3,7 @@
 
 # provider-mongodbatlas-api
 
-Kubeform CRDs for [Terraform Mongodbatlas Provider](https://github.com/mongodbatlas/terraform-provider-mongodbatlas)
+Kubeform CRDs for [Terraform MongoDB Atlas Provider](https://github.com/mongodb/terraform-provider-mongodbatlas)
 
 ## Installation
 
