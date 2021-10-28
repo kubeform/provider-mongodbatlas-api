@@ -83,6 +83,10 @@ spec:
                           type: string
                         db:
                           type: string
+                        isCustomShardKeyHashed:
+                          type: boolean
+                        isShardKeyUnique:
+                          type: boolean
                       required:
                       - collection
                       - customShardKey
@@ -123,6 +127,10 @@ spec:
                           type: string
                         db:
                           type: string
+                        isCustomShardKeyHashed:
+                          type: boolean
+                        isShardKeyUnique:
+                          type: boolean
                       required:
                       - collection
                       - customShardKey

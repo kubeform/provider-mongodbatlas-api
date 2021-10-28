@@ -18,6 +18,8 @@ limitations under the License.
 
 package v1alpha1
 
+type BackupScheduleExpansion interface{}
+
 type ProviderAccessExpansion interface{}
 
 type ProviderAccessAuthorizationExpansion interface{}

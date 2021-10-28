@@ -83,6 +83,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Auditing().V1alpha1().Auditings().Informer()}, nil
 
 		// Group=cloud.mongodbatlas.kubeform.com, Version=v1alpha1
+	case cloudv1alpha1.SchemeGroupVersion.WithResource("backupschedules"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().BackupSchedules().Informer()}, nil
 	case cloudv1alpha1.SchemeGroupVersion.WithResource("provideraccesses"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().ProviderAccesses().Informer()}, nil
 	case cloudv1alpha1.SchemeGroupVersion.WithResource("provideraccessauthorizations"):
