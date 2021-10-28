@@ -31,35 +31,32 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 )
 
-func (r *Peering) SetupWebhookWithManager(mgr ctrl.Manager) error {
+func (r *BackupSchedule) SetupWebhookWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewWebhookManagedBy(mgr).
 		For(r).
 		Complete()
 }
 
-//+kubebuilder:webhook:verbs=create;update;delete,path=/validate-network-mongodbatlas-kubeform-com-v1alpha1-peering,mutating=false,failurePolicy=fail,groups=network.mongodbatlas.kubeform.com,resources=peerings,versions=v1alpha1,name=peering.network.mongodbatlas.kubeform.io,sideEffects=None,admissionReviewVersions=v1
+//+kubebuilder:webhook:verbs=create;update;delete,path=/validate-cloud-mongodbatlas-kubeform-com-v1alpha1-backupschedule,mutating=false,failurePolicy=fail,groups=cloud.mongodbatlas.kubeform.com,resources=backupschedules,versions=v1alpha1,name=backupschedule.cloud.mongodbatlas.kubeform.io,sideEffects=None,admissionReviewVersions=v1
 
-var _ webhook.Validator = &Peering{}
+var _ webhook.Validator = &BackupSchedule{}
 
-var peeringForceNewList = map[string]bool{
-	"/atlas_cidr_block": true,
-	"/container_id":     true,
-	"/project_id":       true,
-	"/vpc_id":           true,
+var backupscheduleForceNewList = map[string]bool{
+	"/project_id": true,
 }
 
 // ValidateCreate implements webhook.Validator so a webhook will be registered for the type
-func (r *Peering) ValidateCreate() error {
+func (r *BackupSchedule) ValidateCreate() error {
 	return nil
 }
 
 // ValidateUpdate implements webhook.Validator so a webhook will be registered for the type
-func (r *Peering) ValidateUpdate(old runtime.Object) error {
+func (r *BackupSchedule) ValidateUpdate(old runtime.Object) error {
 	if r.Spec.Resource.ID == "" {
 		return nil
 	}
 	newObj := r.Spec.Resource
-	res := old.(*Peering)
+	res := old.(*BackupSchedule)
 	oldObj := res.Spec.Resource
 
 	jsnitr := jsoniter.Config{
@@ -91,7 +88,7 @@ func (r *Peering) ValidateUpdate(old runtime.Object) error {
 		return err
 	}
 
-	for key := range peeringForceNewList {
+	for key := range backupscheduleForceNewList {
 		keySplit := strings.Split(key, "/*")
 		length := len(keySplit)
 		checkIfAnyDif := false
@@ -99,16 +96,16 @@ func (r *Peering) ValidateUpdate(old runtime.Object) error {
 		util.CheckIfAnyDifference("", keySplit, 0, length, &checkIfAnyDif, tempNew, tempOld, tempNew)
 
 		if checkIfAnyDif && r.Spec.UpdatePolicy == base.UpdatePolicyDoNotDestroy {
-			return fmt.Errorf(`peering "%v/%v" immutable field can't be updated. To update, change spec.updatePolicy to Destroy`, r.Namespace, r.Name)
+			return fmt.Errorf(`backupschedule "%v/%v" immutable field can't be updated. To update, change spec.updatePolicy to Destroy`, r.Namespace, r.Name)
 		}
 	}
 	return nil
 }
 
 // ValidateDelete implements webhook.Validator so a webhook will be registered for the type
-func (r *Peering) ValidateDelete() error {
+func (r *BackupSchedule) ValidateDelete() error {
 	if r.Spec.TerminationPolicy == base.TerminationPolicyDoNotTerminate {
-		return fmt.Errorf(`peering "%v/%v" can't be terminated. To delete, change spec.terminationPolicy to Delete`, r.Namespace, r.Name)
+		return fmt.Errorf(`backupschedule "%v/%v" can't be terminated. To delete, change spec.terminationPolicy to Delete`, r.Namespace, r.Name)
 	}
 	return nil
 }

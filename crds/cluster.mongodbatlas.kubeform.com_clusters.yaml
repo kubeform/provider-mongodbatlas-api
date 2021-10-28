@@ -59,6 +59,10 @@ spec:
                 properties:
                   advancedConfiguration:
                     properties:
+                      defaultReadConcern:
+                        type: string
+                      defaultWriteConcern:
+                        type: string
                       failIndexKeyTooLong:
                         type: boolean
                       javascriptEnabled:
@@ -86,6 +90,8 @@ spec:
                   backingProviderName:
                     type: string
                   backupEnabled:
+                    description: Clusters running MongoDB FCV 4.2 or later and any
+                      new Atlas clusters of any type do not support this parameter
                     type: boolean
                   biConnector:
                     additionalProperties:
@@ -99,6 +105,8 @@ spec:
                       readPreference:
                         type: string
                     type: object
+                  cloudBackup:
+                    type: boolean
                   clusterID:
                     type: string
                   clusterType:
@@ -192,6 +200,7 @@ spec:
                   providerAutoScalingComputeMinInstanceSize:
                     type: string
                   providerBackupEnabled:
+                    description: Deprecated
                     type: boolean
                   providerDiskIops:
                     format: int64
@@ -309,6 +318,10 @@ spec:
                 properties:
                   advancedConfiguration:
                     properties:
+                      defaultReadConcern:
+                        type: string
+                      defaultWriteConcern:
+                        type: string
                       failIndexKeyTooLong:
                         type: boolean
                       javascriptEnabled:
@@ -336,6 +349,8 @@ spec:
                   backingProviderName:
                     type: string
                   backupEnabled:
+                    description: Clusters running MongoDB FCV 4.2 or later and any
+                      new Atlas clusters of any type do not support this parameter
                     type: boolean
                   biConnector:
                     additionalProperties:
@@ -349,6 +364,8 @@ spec:
                       readPreference:
                         type: string
                     type: object
+                  cloudBackup:
+                    type: boolean
                   clusterID:
                     type: string
                   clusterType:
@@ -442,6 +459,7 @@ spec:
                   providerAutoScalingComputeMinInstanceSize:
                     type: string
                   providerBackupEnabled:
+                    description: Deprecated
                     type: boolean
                   providerDiskIops:
                     format: int64

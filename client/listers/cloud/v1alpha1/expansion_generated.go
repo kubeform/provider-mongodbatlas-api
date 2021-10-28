@@ -18,6 +18,14 @@ limitations under the License.
 
 package v1alpha1
 
+// BackupScheduleListerExpansion allows custom methods to be added to
+// BackupScheduleLister.
+type BackupScheduleListerExpansion interface{}
+
+// BackupScheduleNamespaceListerExpansion allows custom methods to be added to
+// BackupScheduleNamespaceLister.
+type BackupScheduleNamespaceListerExpansion interface{}
+
 // ProviderAccessListerExpansion allows custom methods to be added to
 // ProviderAccessLister.
 type ProviderAccessListerExpansion interface{}
