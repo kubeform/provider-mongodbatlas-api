@@ -299,11 +299,6 @@ func (in *ProjectSpecResource) DeepCopyInto(out *ProjectSpecResource) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ProjectOwnerID != nil {
-		in, out := &in.ProjectOwnerID, &out.ProjectOwnerID
-		*out = new(string)
-		**out = **in
-	}
 	if in.Teams != nil {
 		in, out := &in.Teams, &out.Teams
 		*out = make([]ProjectSpecTeams, len(*in))

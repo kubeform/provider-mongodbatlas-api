@@ -29,10 +29,6 @@ type FakeCloudV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeCloudV1alpha1) BackupSchedules(namespace string) v1alpha1.BackupScheduleInterface {
-	return &FakeBackupSchedules{c, namespace}
-}
-
 func (c *FakeCloudV1alpha1) ProviderAccesses(namespace string) v1alpha1.ProviderAccessInterface {
 	return &FakeProviderAccesses{c, namespace}
 }
