@@ -59,8 +59,6 @@ spec:
                 properties:
                   autoDefer:
                     type: boolean
-                  autoDeferOnceEnabled:
-                    type: boolean
                   dayOfWeek:
                     format: int64
                     type: integer
@@ -84,8 +82,6 @@ spec:
               state:
                 properties:
                   autoDefer:
-                    type: boolean
-                  autoDeferOnceEnabled:
                     type: boolean
                   dayOfWeek:
                     format: int64

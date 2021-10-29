@@ -68,8 +68,6 @@ spec:
                     type: string
                   orgID:
                     type: string
-                  projectOwnerID:
-                    type: string
                   teams:
                     items:
                       properties:
@@ -100,8 +98,6 @@ spec:
                   name:
                     type: string
                   orgID:
-                    type: string
-                  projectOwnerID:
                     type: string
                   teams:
                     items:

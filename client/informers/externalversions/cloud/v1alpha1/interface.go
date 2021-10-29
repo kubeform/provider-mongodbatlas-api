@@ -24,8 +24,6 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
-	// BackupSchedules returns a BackupScheduleInformer.
-	BackupSchedules() BackupScheduleInformer
 	// ProviderAccesses returns a ProviderAccessInformer.
 	ProviderAccesses() ProviderAccessInformer
 	// ProviderAccessAuthorizations returns a ProviderAccessAuthorizationInformer.
@@ -49,11 +47,6 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
-}
-
-// BackupSchedules returns a BackupScheduleInformer.
-func (v *version) BackupSchedules() BackupScheduleInformer {
-	return &backupScheduleInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // ProviderAccesses returns a ProviderAccessInformer.

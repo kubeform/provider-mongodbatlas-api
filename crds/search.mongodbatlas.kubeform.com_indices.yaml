@@ -60,7 +60,98 @@ spec:
                   analyzer:
                     type: string
                   analyzers:
-                    type: string
+                    items:
+                      properties:
+                        charFilters:
+                          items:
+                            properties:
+                              ignoreTags:
+                                items:
+                                  type: string
+                                type: array
+                              mappings:
+                                type: string
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        tokenFilters:
+                          items:
+                            properties:
+                              ignoreCase:
+                                type: boolean
+                              matches:
+                                type: string
+                              max:
+                                format: int64
+                                type: integer
+                              maxGram:
+                                format: int64
+                                type: integer
+                              maxShingleSize:
+                                format: int64
+                                type: integer
+                              min:
+                                format: int64
+                                type: integer
+                              minGram:
+                                format: int64
+                                type: integer
+                              minShingleSize:
+                                format: int64
+                                type: integer
+                              normalizationForm:
+                                type: string
+                              originalTokens:
+                                type: string
+                              pattern:
+                                type: string
+                              replacement:
+                                type: string
+                              stemmerName:
+                                type: string
+                              termsNotInBounds:
+                                type: string
+                              tokens:
+                                items:
+                                  type: string
+                                type: array
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          type: array
+                        tokenizer:
+                          properties:
+                            group:
+                              format: int64
+                              type: integer
+                            maxGram:
+                              format: int64
+                              type: integer
+                            maxTokenLength:
+                              format: int64
+                              type: integer
+                            minGram:
+                              format: int64
+                              type: integer
+                            pattern:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - type
+                          type: object
+                      required:
+                      - name
+                      - tokenizer
+                      type: object
+                    type: array
                   clusterName:
                     type: string
                   collectionName:
@@ -96,7 +187,98 @@ spec:
                   analyzer:
                     type: string
                   analyzers:
-                    type: string
+                    items:
+                      properties:
+                        charFilters:
+                          items:
+                            properties:
+                              ignoreTags:
+                                items:
+                                  type: string
+                                type: array
+                              mappings:
+                                type: string
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        tokenFilters:
+                          items:
+                            properties:
+                              ignoreCase:
+                                type: boolean
+                              matches:
+                                type: string
+                              max:
+                                format: int64
+                                type: integer
+                              maxGram:
+                                format: int64
+                                type: integer
+                              maxShingleSize:
+                                format: int64
+                                type: integer
+                              min:
+                                format: int64
+                                type: integer
+                              minGram:
+                                format: int64
+                                type: integer
+                              minShingleSize:
+                                format: int64
+                                type: integer
+                              normalizationForm:
+                                type: string
+                              originalTokens:
+                                type: string
+                              pattern:
+                                type: string
+                              replacement:
+                                type: string
+                              stemmerName:
+                                type: string
+                              termsNotInBounds:
+                                type: string
+                              tokens:
+                                items:
+                                  type: string
+                                type: array
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          type: array
+                        tokenizer:
+                          properties:
+                            group:
+                              format: int64
+                              type: integer
+                            maxGram:
+                              format: int64
+                              type: integer
+                            maxTokenLength:
+                              format: int64
+                              type: integer
+                            minGram:
+                              format: int64
+                              type: integer
+                            pattern:
+                              type: string
+                            type:
+                              type: string
+                          required:
+                          - type
+                          type: object
+                      required:
+                      - name
+                      - tokenizer
+                      type: object
+                    type: array
                   clusterName:
                     type: string
                   collectionName:
