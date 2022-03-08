@@ -21,6 +21,7 @@ package versioned
 import (
 	"fmt"
 
+	advancedv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/advanced/v1alpha1"
 	alertv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/alert/v1alpha1"
 	auditingv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/auditing/v1alpha1"
 	cloudv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/cloud/v1alpha1"
@@ -35,6 +36,7 @@ import (
 	maintenancev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/maintenance/v1alpha1"
 	networkv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/network/v1alpha1"
 	onlinev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/online/v1alpha1"
+	orgv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/org/v1alpha1"
 	privatev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/private/v1alpha1"
 	privatelinkv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/privatelink/v1alpha1"
 	projectv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/project/v1alpha1"
@@ -51,6 +53,7 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
+	AdvancedV1alpha1() advancedv1alpha1.AdvancedV1alpha1Interface
 	AlertV1alpha1() alertv1alpha1.AlertV1alpha1Interface
 	AuditingV1alpha1() auditingv1alpha1.AuditingV1alpha1Interface
 	CloudV1alpha1() cloudv1alpha1.CloudV1alpha1Interface
@@ -65,6 +68,7 @@ type Interface interface {
 	MaintenanceV1alpha1() maintenancev1alpha1.MaintenanceV1alpha1Interface
 	NetworkV1alpha1() networkv1alpha1.NetworkV1alpha1Interface
 	OnlineV1alpha1() onlinev1alpha1.OnlineV1alpha1Interface
+	OrgV1alpha1() orgv1alpha1.OrgV1alpha1Interface
 	PrivateV1alpha1() privatev1alpha1.PrivateV1alpha1Interface
 	PrivatelinkV1alpha1() privatelinkv1alpha1.PrivatelinkV1alpha1Interface
 	ProjectV1alpha1() projectv1alpha1.ProjectV1alpha1Interface
@@ -79,6 +83,7 @@ type Interface interface {
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
+	advancedV1alpha1    *advancedv1alpha1.AdvancedV1alpha1Client
 	alertV1alpha1       *alertv1alpha1.AlertV1alpha1Client
 	auditingV1alpha1    *auditingv1alpha1.AuditingV1alpha1Client
 	cloudV1alpha1       *cloudv1alpha1.CloudV1alpha1Client
@@ -93,6 +98,7 @@ type Clientset struct {
 	maintenanceV1alpha1 *maintenancev1alpha1.MaintenanceV1alpha1Client
 	networkV1alpha1     *networkv1alpha1.NetworkV1alpha1Client
 	onlineV1alpha1      *onlinev1alpha1.OnlineV1alpha1Client
+	orgV1alpha1         *orgv1alpha1.OrgV1alpha1Client
 	privateV1alpha1     *privatev1alpha1.PrivateV1alpha1Client
 	privatelinkV1alpha1 *privatelinkv1alpha1.PrivatelinkV1alpha1Client
 	projectV1alpha1     *projectv1alpha1.ProjectV1alpha1Client
@@ -101,6 +107,11 @@ type Clientset struct {
 	teamsV1alpha1       *teamsv1alpha1.TeamsV1alpha1Client
 	thirdV1alpha1       *thirdv1alpha1.ThirdV1alpha1Client
 	x509V1alpha1        *x509v1alpha1.X509V1alpha1Client
+}
+
+// AdvancedV1alpha1 retrieves the AdvancedV1alpha1Client
+func (c *Clientset) AdvancedV1alpha1() advancedv1alpha1.AdvancedV1alpha1Interface {
+	return c.advancedV1alpha1
 }
 
 // AlertV1alpha1 retrieves the AlertV1alpha1Client
@@ -173,6 +184,11 @@ func (c *Clientset) OnlineV1alpha1() onlinev1alpha1.OnlineV1alpha1Interface {
 	return c.onlineV1alpha1
 }
 
+// OrgV1alpha1 retrieves the OrgV1alpha1Client
+func (c *Clientset) OrgV1alpha1() orgv1alpha1.OrgV1alpha1Interface {
+	return c.orgV1alpha1
+}
+
 // PrivateV1alpha1 retrieves the PrivateV1alpha1Client
 func (c *Clientset) PrivateV1alpha1() privatev1alpha1.PrivateV1alpha1Interface {
 	return c.privateV1alpha1
@@ -234,6 +250,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	}
 	var cs Clientset
 	var err error
+	cs.advancedV1alpha1, err = advancedv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 	cs.alertV1alpha1, err = alertv1alpha1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
@@ -290,6 +310,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.orgV1alpha1, err = orgv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 	cs.privateV1alpha1, err = privatev1alpha1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
@@ -334,6 +358,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 // panics if there is an error in the config.
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
+	cs.advancedV1alpha1 = advancedv1alpha1.NewForConfigOrDie(c)
 	cs.alertV1alpha1 = alertv1alpha1.NewForConfigOrDie(c)
 	cs.auditingV1alpha1 = auditingv1alpha1.NewForConfigOrDie(c)
 	cs.cloudV1alpha1 = cloudv1alpha1.NewForConfigOrDie(c)
@@ -348,6 +373,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	cs.maintenanceV1alpha1 = maintenancev1alpha1.NewForConfigOrDie(c)
 	cs.networkV1alpha1 = networkv1alpha1.NewForConfigOrDie(c)
 	cs.onlineV1alpha1 = onlinev1alpha1.NewForConfigOrDie(c)
+	cs.orgV1alpha1 = orgv1alpha1.NewForConfigOrDie(c)
 	cs.privateV1alpha1 = privatev1alpha1.NewForConfigOrDie(c)
 	cs.privatelinkV1alpha1 = privatelinkv1alpha1.NewForConfigOrDie(c)
 	cs.projectV1alpha1 = projectv1alpha1.NewForConfigOrDie(c)
@@ -364,6 +390,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
+	cs.advancedV1alpha1 = advancedv1alpha1.New(c)
 	cs.alertV1alpha1 = alertv1alpha1.New(c)
 	cs.auditingV1alpha1 = auditingv1alpha1.New(c)
 	cs.cloudV1alpha1 = cloudv1alpha1.New(c)
@@ -378,6 +405,7 @@ func New(c rest.Interface) *Clientset {
 	cs.maintenanceV1alpha1 = maintenancev1alpha1.New(c)
 	cs.networkV1alpha1 = networkv1alpha1.New(c)
 	cs.onlineV1alpha1 = onlinev1alpha1.New(c)
+	cs.orgV1alpha1 = orgv1alpha1.New(c)
 	cs.privateV1alpha1 = privatev1alpha1.New(c)
 	cs.privatelinkV1alpha1 = privatelinkv1alpha1.New(c)
 	cs.projectV1alpha1 = projectv1alpha1.New(c)

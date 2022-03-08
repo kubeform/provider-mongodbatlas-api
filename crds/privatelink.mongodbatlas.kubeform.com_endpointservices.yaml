@@ -63,9 +63,28 @@ spec:
                     type: string
                   deleteRequested:
                     type: boolean
+                  endpointGroupName:
+                    type: string
                   endpointServiceID:
                     type: string
+                  endpoints:
+                    items:
+                      properties:
+                        endpointName:
+                          type: string
+                        ipAddress:
+                          type: string
+                        serviceAttachmentName:
+                          type: string
+                        status:
+                          type: string
+                      type: object
+                    type: array
                   errorMessage:
+                    type: string
+                  gcpProjectID:
+                    type: string
+                  gcpStatus:
                     type: string
                   id:
                     type: string
@@ -97,9 +116,28 @@ spec:
                     type: string
                   deleteRequested:
                     type: boolean
+                  endpointGroupName:
+                    type: string
                   endpointServiceID:
                     type: string
+                  endpoints:
+                    items:
+                      properties:
+                        endpointName:
+                          type: string
+                        ipAddress:
+                          type: string
+                        serviceAttachmentName:
+                          type: string
+                        status:
+                          type: string
+                      type: object
+                    type: array
                   errorMessage:
+                    type: string
+                  gcpProjectID:
+                    type: string
+                  gcpStatus:
                     type: string
                   id:
                     type: string

@@ -28,6 +28,8 @@ type Interface interface {
 	Endpoints() EndpointInformer
 	// EndpointServices returns a EndpointServiceInformer.
 	EndpointServices() EndpointServiceInformer
+	// EndpointServiceAdls returns a EndpointServiceAdlInformer.
+	EndpointServiceAdls() EndpointServiceAdlInformer
 }
 
 type version struct {
@@ -49,4 +51,9 @@ func (v *version) Endpoints() EndpointInformer {
 // EndpointServices returns a EndpointServiceInformer.
 func (v *version) EndpointServices() EndpointServiceInformer {
 	return &endpointServiceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// EndpointServiceAdls returns a EndpointServiceAdlInformer.
+func (v *version) EndpointServiceAdls() EndpointServiceAdlInformer {
+	return &endpointServiceAdlInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

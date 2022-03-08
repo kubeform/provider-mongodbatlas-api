@@ -29,6 +29,7 @@ type PrivatelinkV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	EndpointsGetter
 	EndpointServicesGetter
+	EndpointServiceAdlsGetter
 }
 
 // PrivatelinkV1alpha1Client is used to interact with features provided by the privatelink.mongodbatlas.kubeform.com group.
@@ -42,6 +43,10 @@ func (c *PrivatelinkV1alpha1Client) Endpoints(namespace string) EndpointInterfac
 
 func (c *PrivatelinkV1alpha1Client) EndpointServices(namespace string) EndpointServiceInterface {
 	return newEndpointServices(c, namespace)
+}
+
+func (c *PrivatelinkV1alpha1Client) EndpointServiceAdls(namespace string) EndpointServiceAdlInterface {
+	return newEndpointServiceAdls(c, namespace)
 }
 
 // NewForConfig creates a new PrivatelinkV1alpha1Client for the given config.

@@ -18,6 +18,16 @@ limitations under the License.
 
 package v1alpha1
 
+type BackupScheduleExpansion interface{}
+
+type BackupSnapshotExpansion interface{}
+
+type BackupSnapshotExportBucketExpansion interface{}
+
+type BackupSnapshotExportJobExpansion interface{}
+
+type BackupSnapshotRestoreJobExpansion interface{}
+
 type ProviderAccessExpansion interface{}
 
 type ProviderAccessAuthorizationExpansion interface{}

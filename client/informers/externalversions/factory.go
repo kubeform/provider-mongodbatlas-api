@@ -24,6 +24,7 @@ import (
 	time "time"
 
 	versioned "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned"
+	advanced "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/advanced"
 	alert "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/alert"
 	auditing "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/auditing"
 	cloud "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/cloud"
@@ -39,6 +40,7 @@ import (
 	maintenance "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/maintenance"
 	network "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/network"
 	online "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/online"
+	org "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/org"
 	private "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/private"
 	privatelink "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/privatelink"
 	project "kubeform.dev/provider-mongodbatlas-api/client/informers/externalversions/project"
@@ -194,6 +196,7 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
+	Advanced() advanced.Interface
 	Alert() alert.Interface
 	Auditing() auditing.Interface
 	Cloud() cloud.Interface
@@ -208,6 +211,7 @@ type SharedInformerFactory interface {
 	Maintenance() maintenance.Interface
 	Network() network.Interface
 	Online() online.Interface
+	Org() org.Interface
 	Private() private.Interface
 	Privatelink() privatelink.Interface
 	Project() project.Interface
@@ -216,6 +220,10 @@ type SharedInformerFactory interface {
 	Teams() teams.Interface
 	Third() third.Interface
 	X509() x509.Interface
+}
+
+func (f *sharedInformerFactory) Advanced() advanced.Interface {
+	return advanced.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Alert() alert.Interface {
@@ -272,6 +280,10 @@ func (f *sharedInformerFactory) Network() network.Interface {
 
 func (f *sharedInformerFactory) Online() online.Interface {
 	return online.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Org() org.Interface {
+	return org.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Private() private.Interface {

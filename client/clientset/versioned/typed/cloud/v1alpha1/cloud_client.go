@@ -27,6 +27,11 @@ import (
 
 type CloudV1alpha1Interface interface {
 	RESTClient() rest.Interface
+	BackupSchedulesGetter
+	BackupSnapshotsGetter
+	BackupSnapshotExportBucketsGetter
+	BackupSnapshotExportJobsGetter
+	BackupSnapshotRestoreJobsGetter
 	ProviderAccessesGetter
 	ProviderAccessAuthorizationsGetter
 	ProviderAccessSetupsGetter
@@ -38,6 +43,26 @@ type CloudV1alpha1Interface interface {
 // CloudV1alpha1Client is used to interact with features provided by the cloud.mongodbatlas.kubeform.com group.
 type CloudV1alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *CloudV1alpha1Client) BackupSchedules(namespace string) BackupScheduleInterface {
+	return newBackupSchedules(c, namespace)
+}
+
+func (c *CloudV1alpha1Client) BackupSnapshots(namespace string) BackupSnapshotInterface {
+	return newBackupSnapshots(c, namespace)
+}
+
+func (c *CloudV1alpha1Client) BackupSnapshotExportBuckets(namespace string) BackupSnapshotExportBucketInterface {
+	return newBackupSnapshotExportBuckets(c, namespace)
+}
+
+func (c *CloudV1alpha1Client) BackupSnapshotExportJobs(namespace string) BackupSnapshotExportJobInterface {
+	return newBackupSnapshotExportJobs(c, namespace)
+}
+
+func (c *CloudV1alpha1Client) BackupSnapshotRestoreJobs(namespace string) BackupSnapshotRestoreJobInterface {
+	return newBackupSnapshotRestoreJobs(c, namespace)
 }
 
 func (c *CloudV1alpha1Client) ProviderAccesses(namespace string) ProviderAccessInterface {

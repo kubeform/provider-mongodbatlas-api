@@ -33,3 +33,11 @@ type EndpointServiceListerExpansion interface{}
 // EndpointServiceNamespaceListerExpansion allows custom methods to be added to
 // EndpointServiceNamespaceLister.
 type EndpointServiceNamespaceListerExpansion interface{}
+
+// EndpointServiceAdlListerExpansion allows custom methods to be added to
+// EndpointServiceAdlLister.
+type EndpointServiceAdlListerExpansion interface{}
+
+// EndpointServiceAdlNamespaceListerExpansion allows custom methods to be added to
+// EndpointServiceAdlNamespaceLister.
+type EndpointServiceAdlNamespaceListerExpansion interface{}

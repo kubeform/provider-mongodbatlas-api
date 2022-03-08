@@ -57,6 +57,20 @@ spec:
                 type: object
               resource:
                 properties:
+                  apiKeys:
+                    items:
+                      properties:
+                        apiKeyID:
+                          type: string
+                        roleNames:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - apiKeyID
+                      - roleNames
+                      type: object
+                    type: array
                   clusterCount:
                     format: int64
                     type: integer
@@ -67,6 +81,8 @@ spec:
                   name:
                     type: string
                   orgID:
+                    type: string
+                  projectOwnerID:
                     type: string
                   teams:
                     items:
@@ -82,12 +98,28 @@ spec:
                       - teamID
                       type: object
                     type: array
+                  withDefaultAlertsSettings:
+                    type: boolean
                 required:
                 - name
                 - orgID
                 type: object
               state:
                 properties:
+                  apiKeys:
+                    items:
+                      properties:
+                        apiKeyID:
+                          type: string
+                        roleNames:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - apiKeyID
+                      - roleNames
+                      type: object
+                    type: array
                   clusterCount:
                     format: int64
                     type: integer
@@ -98,6 +130,8 @@ spec:
                   name:
                     type: string
                   orgID:
+                    type: string
+                  projectOwnerID:
                     type: string
                   teams:
                     items:
@@ -113,6 +147,8 @@ spec:
                       - teamID
                       type: object
                     type: array
+                  withDefaultAlertsSettings:
+                    type: boolean
                 required:
                 - name
                 - orgID

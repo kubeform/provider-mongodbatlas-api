@@ -29,6 +29,10 @@ type FakeProjectV1alpha1 struct {
 	*testing.Fake
 }
 
+func (c *FakeProjectV1alpha1) Invitations(namespace string) v1alpha1.InvitationInterface {
+	return &FakeInvitations{c, namespace}
+}
+
 func (c *FakeProjectV1alpha1) IpAccessLists(namespace string) v1alpha1.IpAccessListInterface {
 	return &FakeIpAccessLists{c, namespace}
 }

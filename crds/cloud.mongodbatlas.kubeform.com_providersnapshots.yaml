@@ -85,6 +85,8 @@ spec:
                   storageSizeBytes:
                     format: int64
                     type: integer
+                  timeout:
+                    type: string
                   type:
                     type: string
                 required:
@@ -123,6 +125,8 @@ spec:
                   storageSizeBytes:
                     format: int64
                     type: integer
+                  timeout:
+                    type: string
                   type:
                     type: string
                 required:

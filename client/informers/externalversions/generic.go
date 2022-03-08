@@ -21,7 +21,8 @@ package externalversions
 import (
 	"fmt"
 
-	v1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/alert/v1alpha1"
+	v1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/advanced/v1alpha1"
+	alertv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/alert/v1alpha1"
 	auditingv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/auditing/v1alpha1"
 	cloudv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/cloud/v1alpha1"
 	clusterv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/cluster/v1alpha1"
@@ -35,6 +36,7 @@ import (
 	maintenancev1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/maintenance/v1alpha1"
 	networkv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/network/v1alpha1"
 	onlinev1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/online/v1alpha1"
+	orgv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/org/v1alpha1"
 	privatev1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/private/v1alpha1"
 	privatelinkv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/privatelink/v1alpha1"
 	projectv1alpha1 "kubeform.dev/provider-mongodbatlas-api/apis/project/v1alpha1"
@@ -74,8 +76,12 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=alert.mongodbatlas.kubeform.com, Version=v1alpha1
-	case v1alpha1.SchemeGroupVersion.WithResource("configurations"):
+	// Group=advanced.mongodbatlas.kubeform.com, Version=v1alpha1
+	case v1alpha1.SchemeGroupVersion.WithResource("clusters"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Advanced().V1alpha1().Clusters().Informer()}, nil
+
+		// Group=alert.mongodbatlas.kubeform.com, Version=v1alpha1
+	case alertv1alpha1.SchemeGroupVersion.WithResource("configurations"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Alert().V1alpha1().Configurations().Informer()}, nil
 
 		// Group=auditing.mongodbatlas.kubeform.com, Version=v1alpha1
@@ -83,6 +89,16 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Auditing().V1alpha1().Auditings().Informer()}, nil
 
 		// Group=cloud.mongodbatlas.kubeform.com, Version=v1alpha1
+	case cloudv1alpha1.SchemeGroupVersion.WithResource("backupschedules"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().BackupSchedules().Informer()}, nil
+	case cloudv1alpha1.SchemeGroupVersion.WithResource("backupsnapshots"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().BackupSnapshots().Informer()}, nil
+	case cloudv1alpha1.SchemeGroupVersion.WithResource("backupsnapshotexportbuckets"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().BackupSnapshotExportBuckets().Informer()}, nil
+	case cloudv1alpha1.SchemeGroupVersion.WithResource("backupsnapshotexportjobs"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().BackupSnapshotExportJobs().Informer()}, nil
+	case cloudv1alpha1.SchemeGroupVersion.WithResource("backupsnapshotrestorejobs"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().BackupSnapshotRestoreJobs().Informer()}, nil
 	case cloudv1alpha1.SchemeGroupVersion.WithResource("provideraccesses"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Cloud().V1alpha1().ProviderAccesses().Informer()}, nil
 	case cloudv1alpha1.SchemeGroupVersion.WithResource("provideraccessauthorizations"):
@@ -146,6 +162,10 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	case onlinev1alpha1.SchemeGroupVersion.WithResource("archives"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Online().V1alpha1().Archives().Informer()}, nil
 
+		// Group=org.mongodbatlas.kubeform.com, Version=v1alpha1
+	case orgv1alpha1.SchemeGroupVersion.WithResource("invitations"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Org().V1alpha1().Invitations().Informer()}, nil
+
 		// Group=private.mongodbatlas.kubeform.com, Version=v1alpha1
 	case privatev1alpha1.SchemeGroupVersion.WithResource("ipmodes"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Private().V1alpha1().IpModes().Informer()}, nil
@@ -155,8 +175,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Privatelink().V1alpha1().Endpoints().Informer()}, nil
 	case privatelinkv1alpha1.SchemeGroupVersion.WithResource("endpointservices"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Privatelink().V1alpha1().EndpointServices().Informer()}, nil
+	case privatelinkv1alpha1.SchemeGroupVersion.WithResource("endpointserviceadls"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Privatelink().V1alpha1().EndpointServiceAdls().Informer()}, nil
 
 		// Group=project.mongodbatlas.kubeform.com, Version=v1alpha1
+	case projectv1alpha1.SchemeGroupVersion.WithResource("invitations"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Project().V1alpha1().Invitations().Informer()}, nil
 	case projectv1alpha1.SchemeGroupVersion.WithResource("ipaccesslists"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Project().V1alpha1().IpAccessLists().Informer()}, nil
 	case projectv1alpha1.SchemeGroupVersion.WithResource("projects"):

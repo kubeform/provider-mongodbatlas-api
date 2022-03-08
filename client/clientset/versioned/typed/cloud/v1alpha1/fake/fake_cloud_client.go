@@ -29,6 +29,26 @@ type FakeCloudV1alpha1 struct {
 	*testing.Fake
 }
 
+func (c *FakeCloudV1alpha1) BackupSchedules(namespace string) v1alpha1.BackupScheduleInterface {
+	return &FakeBackupSchedules{c, namespace}
+}
+
+func (c *FakeCloudV1alpha1) BackupSnapshots(namespace string) v1alpha1.BackupSnapshotInterface {
+	return &FakeBackupSnapshots{c, namespace}
+}
+
+func (c *FakeCloudV1alpha1) BackupSnapshotExportBuckets(namespace string) v1alpha1.BackupSnapshotExportBucketInterface {
+	return &FakeBackupSnapshotExportBuckets{c, namespace}
+}
+
+func (c *FakeCloudV1alpha1) BackupSnapshotExportJobs(namespace string) v1alpha1.BackupSnapshotExportJobInterface {
+	return &FakeBackupSnapshotExportJobs{c, namespace}
+}
+
+func (c *FakeCloudV1alpha1) BackupSnapshotRestoreJobs(namespace string) v1alpha1.BackupSnapshotRestoreJobInterface {
+	return &FakeBackupSnapshotRestoreJobs{c, namespace}
+}
+
 func (c *FakeCloudV1alpha1) ProviderAccesses(namespace string) v1alpha1.ProviderAccessInterface {
 	return &FakeProviderAccesses{c, namespace}
 }

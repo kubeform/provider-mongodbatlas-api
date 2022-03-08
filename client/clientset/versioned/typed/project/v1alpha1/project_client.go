@@ -27,6 +27,7 @@ import (
 
 type ProjectV1alpha1Interface interface {
 	RESTClient() rest.Interface
+	InvitationsGetter
 	IpAccessListsGetter
 	ProjectsGetter
 }
@@ -34,6 +35,10 @@ type ProjectV1alpha1Interface interface {
 // ProjectV1alpha1Client is used to interact with features provided by the project.mongodbatlas.kubeform.com group.
 type ProjectV1alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *ProjectV1alpha1Client) Invitations(namespace string) InvitationInterface {
+	return newInvitations(c, namespace)
 }
 
 func (c *ProjectV1alpha1Client) IpAccessLists(namespace string) IpAccessListInterface {
