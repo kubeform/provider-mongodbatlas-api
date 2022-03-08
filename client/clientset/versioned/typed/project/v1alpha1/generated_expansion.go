@@ -18,6 +18,8 @@ limitations under the License.
 
 package v1alpha1
 
+type InvitationExpansion interface{}
+
 type IpAccessListExpansion interface{}
 
 type ProjectExpansion interface{}

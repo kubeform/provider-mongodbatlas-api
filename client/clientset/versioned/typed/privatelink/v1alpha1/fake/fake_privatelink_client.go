@@ -37,6 +37,10 @@ func (c *FakePrivatelinkV1alpha1) EndpointServices(namespace string) v1alpha1.En
 	return &FakeEndpointServices{c, namespace}
 }
 
+func (c *FakePrivatelinkV1alpha1) EndpointServiceAdls(namespace string) v1alpha1.EndpointServiceAdlInterface {
+	return &FakeEndpointServiceAdls{c, namespace}
+}
+
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakePrivatelinkV1alpha1) RESTClient() rest.Interface {

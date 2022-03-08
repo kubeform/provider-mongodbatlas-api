@@ -57,6 +57,10 @@ spec:
                 type: object
               resource:
                 properties:
+                  endpointGroupNames:
+                    items:
+                      type: string
+                    type: array
                   endpointServiceName:
                     type: string
                   errorMessage:
@@ -83,6 +87,12 @@ spec:
                     type: string
                   region:
                     type: string
+                  regionName:
+                    type: string
+                  serviceAttachmentNames:
+                    items:
+                      type: string
+                    type: array
                   status:
                     type: string
                 required:
@@ -92,6 +102,10 @@ spec:
                 type: object
               state:
                 properties:
+                  endpointGroupNames:
+                    items:
+                      type: string
+                    type: array
                   endpointServiceName:
                     type: string
                   errorMessage:
@@ -118,6 +132,12 @@ spec:
                     type: string
                   region:
                     type: string
+                  regionName:
+                    type: string
+                  serviceAttachmentNames:
+                    items:
+                      type: string
+                    type: array
                   status:
                     type: string
                 required:

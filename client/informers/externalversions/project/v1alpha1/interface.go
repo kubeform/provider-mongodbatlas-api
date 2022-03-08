@@ -24,6 +24,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
+	// Invitations returns a InvitationInformer.
+	Invitations() InvitationInformer
 	// IpAccessLists returns a IpAccessListInformer.
 	IpAccessLists() IpAccessListInformer
 	// Projects returns a ProjectInformer.
@@ -39,6 +41,11 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
+}
+
+// Invitations returns a InvitationInformer.
+func (v *version) Invitations() InvitationInformer {
+	return &invitationInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // IpAccessLists returns a IpAccessListInformer.

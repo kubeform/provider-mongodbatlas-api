@@ -18,6 +18,46 @@ limitations under the License.
 
 package v1alpha1
 
+// BackupScheduleListerExpansion allows custom methods to be added to
+// BackupScheduleLister.
+type BackupScheduleListerExpansion interface{}
+
+// BackupScheduleNamespaceListerExpansion allows custom methods to be added to
+// BackupScheduleNamespaceLister.
+type BackupScheduleNamespaceListerExpansion interface{}
+
+// BackupSnapshotListerExpansion allows custom methods to be added to
+// BackupSnapshotLister.
+type BackupSnapshotListerExpansion interface{}
+
+// BackupSnapshotNamespaceListerExpansion allows custom methods to be added to
+// BackupSnapshotNamespaceLister.
+type BackupSnapshotNamespaceListerExpansion interface{}
+
+// BackupSnapshotExportBucketListerExpansion allows custom methods to be added to
+// BackupSnapshotExportBucketLister.
+type BackupSnapshotExportBucketListerExpansion interface{}
+
+// BackupSnapshotExportBucketNamespaceListerExpansion allows custom methods to be added to
+// BackupSnapshotExportBucketNamespaceLister.
+type BackupSnapshotExportBucketNamespaceListerExpansion interface{}
+
+// BackupSnapshotExportJobListerExpansion allows custom methods to be added to
+// BackupSnapshotExportJobLister.
+type BackupSnapshotExportJobListerExpansion interface{}
+
+// BackupSnapshotExportJobNamespaceListerExpansion allows custom methods to be added to
+// BackupSnapshotExportJobNamespaceLister.
+type BackupSnapshotExportJobNamespaceListerExpansion interface{}
+
+// BackupSnapshotRestoreJobListerExpansion allows custom methods to be added to
+// BackupSnapshotRestoreJobLister.
+type BackupSnapshotRestoreJobListerExpansion interface{}
+
+// BackupSnapshotRestoreJobNamespaceListerExpansion allows custom methods to be added to
+// BackupSnapshotRestoreJobNamespaceLister.
+type BackupSnapshotRestoreJobNamespaceListerExpansion interface{}
+
 // ProviderAccessListerExpansion allows custom methods to be added to
 // ProviderAccessLister.
 type ProviderAccessListerExpansion interface{}

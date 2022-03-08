@@ -20,6 +20,8 @@ package fake
 
 import (
 	clientset "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned"
+	advancedv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/advanced/v1alpha1"
+	fakeadvancedv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/advanced/v1alpha1/fake"
 	alertv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/alert/v1alpha1"
 	fakealertv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/alert/v1alpha1/fake"
 	auditingv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/auditing/v1alpha1"
@@ -48,6 +50,8 @@ import (
 	fakenetworkv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/network/v1alpha1/fake"
 	onlinev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/online/v1alpha1"
 	fakeonlinev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/online/v1alpha1/fake"
+	orgv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/org/v1alpha1"
+	fakeorgv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/org/v1alpha1/fake"
 	privatev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/private/v1alpha1"
 	fakeprivatev1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/private/v1alpha1/fake"
 	privatelinkv1alpha1 "kubeform.dev/provider-mongodbatlas-api/client/clientset/versioned/typed/privatelink/v1alpha1"
@@ -119,6 +123,11 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
+// AdvancedV1alpha1 retrieves the AdvancedV1alpha1Client
+func (c *Clientset) AdvancedV1alpha1() advancedv1alpha1.AdvancedV1alpha1Interface {
+	return &fakeadvancedv1alpha1.FakeAdvancedV1alpha1{Fake: &c.Fake}
+}
+
 // AlertV1alpha1 retrieves the AlertV1alpha1Client
 func (c *Clientset) AlertV1alpha1() alertv1alpha1.AlertV1alpha1Interface {
 	return &fakealertv1alpha1.FakeAlertV1alpha1{Fake: &c.Fake}
@@ -187,6 +196,11 @@ func (c *Clientset) NetworkV1alpha1() networkv1alpha1.NetworkV1alpha1Interface {
 // OnlineV1alpha1 retrieves the OnlineV1alpha1Client
 func (c *Clientset) OnlineV1alpha1() onlinev1alpha1.OnlineV1alpha1Interface {
 	return &fakeonlinev1alpha1.FakeOnlineV1alpha1{Fake: &c.Fake}
+}
+
+// OrgV1alpha1 retrieves the OrgV1alpha1Client
+func (c *Clientset) OrgV1alpha1() orgv1alpha1.OrgV1alpha1Interface {
+	return &fakeorgv1alpha1.FakeOrgV1alpha1{Fake: &c.Fake}
 }
 
 // PrivateV1alpha1 retrieves the PrivateV1alpha1Client

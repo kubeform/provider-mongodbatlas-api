@@ -61,6 +61,8 @@ spec:
                     type: string
                   projectID:
                     type: string
+                required:
+                - projectID
                 type: object
               secretRef:
                 description: LocalObjectReference contains enough information to let
@@ -77,6 +79,8 @@ spec:
                     type: string
                   projectID:
                     type: string
+                required:
+                - projectID
                 type: object
               terminationPolicy:
                 enum:

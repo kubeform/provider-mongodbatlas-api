@@ -24,6 +24,16 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
+	// BackupSchedules returns a BackupScheduleInformer.
+	BackupSchedules() BackupScheduleInformer
+	// BackupSnapshots returns a BackupSnapshotInformer.
+	BackupSnapshots() BackupSnapshotInformer
+	// BackupSnapshotExportBuckets returns a BackupSnapshotExportBucketInformer.
+	BackupSnapshotExportBuckets() BackupSnapshotExportBucketInformer
+	// BackupSnapshotExportJobs returns a BackupSnapshotExportJobInformer.
+	BackupSnapshotExportJobs() BackupSnapshotExportJobInformer
+	// BackupSnapshotRestoreJobs returns a BackupSnapshotRestoreJobInformer.
+	BackupSnapshotRestoreJobs() BackupSnapshotRestoreJobInformer
 	// ProviderAccesses returns a ProviderAccessInformer.
 	ProviderAccesses() ProviderAccessInformer
 	// ProviderAccessAuthorizations returns a ProviderAccessAuthorizationInformer.
@@ -47,6 +57,31 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
+}
+
+// BackupSchedules returns a BackupScheduleInformer.
+func (v *version) BackupSchedules() BackupScheduleInformer {
+	return &backupScheduleInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// BackupSnapshots returns a BackupSnapshotInformer.
+func (v *version) BackupSnapshots() BackupSnapshotInformer {
+	return &backupSnapshotInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// BackupSnapshotExportBuckets returns a BackupSnapshotExportBucketInformer.
+func (v *version) BackupSnapshotExportBuckets() BackupSnapshotExportBucketInformer {
+	return &backupSnapshotExportBucketInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// BackupSnapshotExportJobs returns a BackupSnapshotExportJobInformer.
+func (v *version) BackupSnapshotExportJobs() BackupSnapshotExportJobInformer {
+	return &backupSnapshotExportJobInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// BackupSnapshotRestoreJobs returns a BackupSnapshotRestoreJobInformer.
+func (v *version) BackupSnapshotRestoreJobs() BackupSnapshotRestoreJobInformer {
+	return &backupSnapshotRestoreJobInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // ProviderAccesses returns a ProviderAccessInformer.

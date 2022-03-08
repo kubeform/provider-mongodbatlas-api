@@ -130,6 +130,8 @@ spec:
                           type: boolean
                         teamID:
                           type: string
+                        teamName:
+                          type: string
                         typeName:
                           type: string
                         username:
@@ -243,6 +245,8 @@ spec:
                         smsEnabled:
                           type: boolean
                         teamID:
+                          type: string
+                        teamName:
                           type: string
                         typeName:
                           type: string

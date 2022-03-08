@@ -21,3 +21,5 @@ package v1alpha1
 type EndpointExpansion interface{}
 
 type EndpointServiceExpansion interface{}
+
+type EndpointServiceAdlExpansion interface{}

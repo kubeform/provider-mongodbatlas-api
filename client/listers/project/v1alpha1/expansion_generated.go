@@ -18,6 +18,14 @@ limitations under the License.
 
 package v1alpha1
 
+// InvitationListerExpansion allows custom methods to be added to
+// InvitationLister.
+type InvitationListerExpansion interface{}
+
+// InvitationNamespaceListerExpansion allows custom methods to be added to
+// InvitationNamespaceLister.
+type InvitationNamespaceListerExpansion interface{}
+
 // IpAccessListListerExpansion allows custom methods to be added to
 // IpAccessListLister.
 type IpAccessListListerExpansion interface{}
